@@ -1,0 +1,165 @@
+{
+    "type": "bundle",
+    "id": "bundle--ae0e1ef0-1ed4-4c9f-935c-1c5e227515ac",
+    "objects": [
+      {
+        "type": "intrusion-set",
+        "spec_version": "2.1",
+        "id": "intrusion-set--ea80a9b8-0caf-414f-9b71-81450cd842f7",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2020-03-18T20:10:45.119Z",
+        "name": "admin@338",
+        "description": "admin@338 is a China-based cyber threat group. It has previously used newsworthy events as lures to deliver malware and has primarily targeted organizations involved in financial, economic, and trade policy, typically using publicly available RATs such as PoisonIvy, as well as some non-public backdoors.",
+        "resource_level": "government",
+        "primary_motivation": "organizational-gain"
+      },
+      {
+        "type": "campaign",
+        "spec_version": "2.1",
+        "id": "campaign--a707e7a7-eb4d-450d-8bd4-7cb05fad6492",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2020-03-18T20:10:45.119Z",
+        "name": "admin@338",
+        "description": "This activity has been active since 2008, primarily targeting the financial services industry, but also seeing activity in the telecommunications, government and defense sectors.",
+        "first_seen": "2008-01-07T00:00:00.000000Z"
+      },
+      {
+        "type": "malware",
+        "spec_version": "2.1",
+        "is_family": true,
+        "id": "malware--f506a3ea-22e6-494c-ac4f-99e8133c7640",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2020-03-18T20:10:45.119Z",
+        "name": "PIVY Variant (808e21d6efa2884811fbd0adf67fda78)",
+        "description": "The key@123 sample (password for admin@338), 808e21d6efa2884811fbd0adf67fda78, connects directly to 219.76.208.163",
+        "malware_types": [
+          "remote-access-trojan"
+        ]
+      },
+      {
+        "type": "malware",
+        "spec_version": "2.1",
+        "is_family": true,
+        "id": "malware--46dca198-73af-4d9b-9c68-eda65df5000e",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2020-03-18T20:10:45.119Z",
+        "name": "PIVY Variant (8010cae3e8431bb11ed6dc9acabb93b7,)",
+        "description": "Two CnC domain names from the admin@338 sample 8010cae3e8431bb11ed6dc9acabb93b7, connect to www.webserver.dynssl.com and www.webserver.freetcp.com and resolve to 219.76.208.163. It also connects to the CnC domain www.webserver.fartit.com.",
+        "malware_types": [
+          "remote-access-trojan"
+        ]
+      },
+      {
+        "type": "attack-pattern",
+        "spec_version": "2.1",
+        "id": "attack-pattern--58c40357-b6d6-4066-87d5-e3b081c9c5d0",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2020-03-18T20:10:45.119Z",
+        "external_references": [
+          {
+            "source_name": "capec",
+            "description": "spear phishing",
+            "external_id": "CAPEC-163"
+          }
+        ],
+        "name": "Spear Phishing Attack Pattern used by admin@338",
+        "description": "The preferred attack vector used by admin@338 is spear phishing emails. These emails use content relevant to the target and are designed to trick the target into opening an attachment containing malicious PIVY server code.",
+        "kill_chain_phases": [
+          {
+            "kill_chain_name": "mandiant-attack-lifecycle-model",
+            "phase_name": "initial-compromise"
+          }
+        ]
+      },
+      {
+        "type": "vulnerability",
+        "spec_version": "2.1",
+        "id": "vulnerability--ede71542-d26b-4409-b197-062d1d1add0f",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2020-03-18T20:10:45.119Z",
+        "name": "CVE-2012-0158",
+        "description": "Weaponized Microsoft Word document used by admin@338",
+        "external_references": [
+          {
+            "source_name": "cve",
+            "external_id": "CVE-2012-0158"
+          }
+        ]
+      },
+      {
+        "type": "vulnerability",
+        "spec_version": "2.1",
+        "id": "vulnerability--1df9cf3c-fa34-41c3-8f5c-5d70e3955403",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2020-03-18T20:10:45.119Z",
+        "name": "CVE-2009-4324",
+        "description": "Adobe acrobat PDF's used by admin@338",
+        "external_references": [
+          {
+            "source_name": "cve",
+            "external_id": "CVE-2009-4324"
+          }
+        ]
+      },
+      {
+        "type": "relationship",
+        "spec_version": "2.1",
+        "id": "relationship--d7f6006f-0b9c-4218-8800-b1275126d38c",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2020-03-18T20:10:45.119Z",
+        "relationship_type": "uses",
+        "source_ref": "campaign--a707e7a7-eb4d-450d-8bd4-7cb05fad6492",
+        "target_ref": "attack-pattern--58c40357-b6d6-4066-87d5-e3b081c9c5d0"
+      },
+      {
+        "type": "relationship",
+        "spec_version": "2.1",
+        "id": "relationship--e5e1e211-410a-4a0b-9a73-895ac90f05a6",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2020-03-18T20:10:45.119Z",
+        "relationship_type": "uses",
+        "source_ref": "campaign--a707e7a7-eb4d-450d-8bd4-7cb05fad6492",
+        "target_ref": "malware--46dca198-73af-4d9b-9c68-eda65df5000e"
+      },
+      {
+        "type": "relationship",
+        "spec_version": "2.1",
+        "id": "relationship--57ca7d77-792b-41fe-9a75-763b614796e4",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2020-03-18T20:10:45.119Z",
+        "relationship_type": "targets",
+        "source_ref": "campaign--a707e7a7-eb4d-450d-8bd4-7cb05fad6492",
+        "target_ref": "vulnerability--ede71542-d26b-4409-b197-062d1d1add0f"
+      },
+      {
+        "type": "relationship",
+        "spec_version": "2.1",
+        "id": "relationship--94a12f16-74db-4cea-8f25-df1b79462ab8",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2020-03-18T20:10:45.119Z",
+        "relationship_type": "targets",
+        "source_ref": "campaign--a707e7a7-eb4d-450d-8bd4-7cb05fad6492",
+        "target_ref": "vulnerability--1df9cf3c-fa34-41c3-8f5c-5d70e3955403"
+      },
+      {
+        "type": "relationship",
+        "spec_version": "2.1",
+        "id": "relationship--60af5381-23da-497f-b8a9-7947ebc7fd15",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2020-03-18T20:10:45.119Z",
+        "relationship_type": "targets",
+        "source_ref": "attack-pattern--58c40357-b6d6-4066-87d5-e3b081c9c5d0",
+        "target_ref": "vulnerability--ede71542-d26b-4409-b197-062d1d1add0f"
+      },
+      {
+        "type": "relationship",
+        "spec_version": "2.1",
+        "id": "relationship--b9736cd3-9482-4094-9178-1cde2b273aff",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2020-03-18T20:10:45.119Z",
+        "relationship_type": "targets",
+        "source_ref": "attack-pattern--58c40357-b6d6-4066-87d5-e3b081c9c5d0",
+        "target_ref": "vulnerability--1df9cf3c-fa34-41c3-8f5c-5d70e3955403"
+      }
+    ]
+}

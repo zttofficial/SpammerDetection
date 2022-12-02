@@ -1,0 +1,151 @@
+{
+    "type": "bundle",
+    "id": "bundle--ae0e1ef0-1ed4-4c9f-935c-1c5e227515ac",
+    "objects": [
+      {
+        "type": "intrusion-set",
+        "spec_version": "2.1",
+        "id": "intrusion-set--ea80a9b8-0caf-414f-9b71-81450cd842f7",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2021-05-26T14:58:41.989Z",
+        "name": "APT1",
+        "description": "APT1 is a Chinese threat group that has been attributed to the 2nd Bureau of the People’s Liberation Army (PLA) General Staff Department’s (GSD) 3rd Department.",
+        "first_seen": "2006-06-01T18:13:15.684Z",
+        "resource_level": "government",
+        "primary_motivation": "organizational-gain",
+        "aliases": [
+          "Comment Crew",
+          "Comment Group",
+          "Comment Panda"
+        ]
+      },
+      {
+        "type": "indicator",
+        "spec_version": "2.1",
+        "pattern_type": "stix",
+        "id": "indicator--925bb394-7422-466c-992a-473fe190d2bf",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2021-05-26T14:58:41.989Z",
+        "name": "HTRAN Hop Point Accessor",
+        "description": "Test description.",
+        "pattern": "[ipv4-addr:value = '223.166.0.0/15']",
+        "indicator_types": [
+          "malicious-activity"
+        ],
+        "valid_from": "2017-05-31T08:02:27.423Z",
+        "kill_chain_phases": [
+          {
+            "kill_chain_name": "mandiant-attack-lifecycle-model",
+            "phase_name": "establish-foothold"
+          }
+        ]
+      },
+      {
+        "type": "malware",
+        "spec_version": "2.1",
+        "is_family": false,
+        "id": "malware--f8f27a3e-5922-400c-8776-44c03e3e4ae3",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2021-05-26T14:58:41.989Z",
+        "name": "WEBC2 Backdoor",
+        "malware_types": [
+          "backdoor",
+          "remote-access-trojan"
+        ],
+        "description": "A WEBC2 backdoor is designed to retrieve a Web page from a C2 server. It expects the page to contain special HTML tags; the backdoor will attempt to interpret the data between the tags as commands.",
+        "kill_chain_phases": [
+          {
+            "kill_chain_name": "mandiant-attack-lifecycle-model",
+            "phase_name": "establish-foothold"
+          }
+        ]
+      },
+      {
+        "type": "malware",
+        "spec_version": "2.1",
+        "is_family": false,
+        "id": "malware--1ecb56cc-0079-483b-ab21-2062d6529c74",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2021-05-26T14:58:41.989Z",
+        "name": "HUC Packet Transmit Tool (HTRAN)",
+        "malware_types": [
+          "backdoor",
+          "remote-access-trojan"
+        ],
+        "description": "When APT1 attackers are not using WEBC2, they need a 'command and control' (C2) user interface so that they can issue commands to the backdoor. This interface is sometimes run on their personal attack system, which is usually in Shanghai. In these cases, when the victim's backdoor makes contact with a jumper, the communication needs to be forwarded from the jumper to the intruder's Shanghai system so that the backdoor can talk to the C2 server software. We have observed 767 separate examples where an APT1 intruder uses the publicly available 'HUC packet transfer tool' or HTRAN on a patch panel, where the HTRAN tool is simply an intermediary that facilitates the connection between the victim and the attacker using the patch panel.",
+        "kill_chain_phases": [
+          {
+            "kill_chain_name": "mandiant-attack-lifecycle-model",
+            "phase_name": "establish-foothold"
+          }
+        ]
+      },
+      {
+        "type": "attack-pattern",
+        "spec_version": "2.1",
+        "id": "attack-pattern--be82852e-c3e8-4f77-abea-99326853fda2",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2021-05-26T14:58:41.989Z",
+        "name": "Initial Compromise",
+        "description": "Spear phishing, the most common technique used by APT1, refers to the use of emails that contain a malicious attachment or a hyperlink to a malicious file. The text in the subject line and body of the email is usually related to the recipient. APT1 also creates webmail accounts using real human names, covering names familiar to the recipient, such as a colleague, company executive, IT department employee or company consultant. The files they use contain malicious executables that install a custom APT1 backdoor, which we call WEBC2-TABLE.",
+        "external_references": [
+          {
+            "source_name": "capec",
+            "description": "spear phishing",
+            "external_id": "CAPEC-163"
+          }
+        ],
+        "kill_chain_phases": [
+          {
+            "kill_chain_name": "mandiant-attack-lifecycle-model",
+            "phase_name": "initial-compromise"
+          }
+        ]
+      },
+      {
+        "type": "attack-pattern",
+        "spec_version": "2.1",
+        "id": "attack-pattern--8ff6b50f-57a3-425f-b9a6-6577ebf4df13",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2021-05-26T14:58:41.989Z",
+        "name": "Establishing a Foothold",
+        "description": "Once an email recipient opens a malicious file, APT1 establishes a foothold and subsequently installs a backdoor. In almost every case, the APT backdoor initiates an outbound connection to the intruder's 'command and control' (C2) server. While APT1 intruders occasionally use publicly available backdoors, such as Poison Ivy and Gh0st RAT, in the vast majority of cases they use what appear to be their own custom backdoors. APT1 backdoors fall into two categories: 'beachhead backdoors' and 'standard backdoors'. Beachhead backdoors provide a toehold for attackers to perform simple tasks such as retrieving files, gathering basic system information, and triggering the execution of other, more important functions such as standard backdoors. an APT1 beachhead backdoor is often what we call a WEBC2 backdoor. the WEBC2 backdoor is probably the best known type of APT1 backdoor and is the reason some security companies refer to APT1 as the The reason for the comment corps. the WEBC2 backdoor is designed to retrieve web pages from C2 servers. It expects web pages to contain special HTML tags; the backdoor will attempt to interpret the data between the tags as commands. the WEBC2 backdoor is often packaged with spear phishing emails. Once installed, APT1 intruders can choose to tell the victim's system to download and execute additional malware of their choice. Standard, non-WEBC2 APT1 backdoors typically communicate using the HTTP protocol (to mix in legitimate network traffic) or a custom protocol of the malware author's own design. the BISCUIT backdoor (named for the command 'bdkzt') is an illustrative example of the range of commands built into APT1's 'standard' backdoors. APT1 began using and continually modified BISCUIT, and continues to use it today. Some APT backdoors attempt to mimic legitimate Internet traffic outside of the HTTP protocol. When network defenders see communication between these backdoors and their C2 servers, they may easily see it as legitimate network traffic. In addition, many of APT1's backdoor programs use SSL encryption to keep the communication hidden in an encrypted SSL tunnel.",
+        "kill_chain_phases": [
+          {
+            "kill_chain_name": "mandiant-attack-lifecycle-model",
+            "phase_name": "establish-foothold"
+          }
+        ]
+      },
+      {
+        "type": "relationship",
+        "spec_version": "2.1",
+        "id": "relationship--7cede760-b866-490e-ad5b-1df34bc14f8d",
+        "created": "2015-05-15T09:12:16.432Z",
+        "modified": "2015-05-15T09:12:16.432Z",
+        "relationship_type": "indicates",
+        "source_ref": "indicator--925bb394-7422-466c-992a-473fe190d2bf",
+        "target_ref": "malware--1ecb56cc-0079-483b-ab21-2062d6529c74"
+      },
+      {
+        "type": "relationship",
+        "spec_version": "2.1",
+        "id": "relationship--7aadfe06-f841-46c2-8b19-4523d0ae42b0",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2021-05-26T14:58:41.989Z",
+        "relationship_type": "uses",
+        "source_ref": "attack-pattern--8ff6b50f-57a3-425f-b9a6-6577ebf4df13",
+        "target_ref": "malware--f8f27a3e-5922-400c-8776-44c03e3e4ae3"
+      },
+      {
+        "type": "relationship",
+        "spec_version": "2.1",
+        "id": "relationship--5a4cf6a8-4584-4e6d-9587-2b3d4ade2177",
+        "created": "2017-05-31T08:02:27.423Z",
+        "modified": "2021-05-26T14:58:41.989Z",
+        "relationship_type": "uses",
+        "source_ref": "attack-pattern--8ff6b50f-57a3-425f-b9a6-6577ebf4df13",
+        "target_ref": "malware--1ecb56cc-0079-483b-ab21-2062d6529c74"
+      }
+    ]
+}
